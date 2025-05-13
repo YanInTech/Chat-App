@@ -12,9 +12,9 @@ class ChatApp extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      title: "Chat App!!!",
-      theme: ThemeData(primarySwatch: Colors.yellow),
-      home: CounterStateful(buttonColor:Colors.blue),
+      title: "Chat App",
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      home: LoginPage(),
     );
   }
 }
