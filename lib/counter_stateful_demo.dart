@@ -39,7 +39,7 @@ class _CounterStatefulState extends State<CounterStateful> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             backgroundColor: widget.buttonColor,
-            child: Icon(Icons.add),
+            child: Icon(Icons.message),
             onPressed: () {
               increment();
             }),
