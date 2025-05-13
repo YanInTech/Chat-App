@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 
 class ChatPage extends StatelessWidget {
-  final String username;
-  const ChatPage({super.key, required this.username});
+  const ChatPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final username = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Hi $username'),
+        title: Text('Hi $username!'),
         actions: [
           IconButton(
               onPressed: () {
