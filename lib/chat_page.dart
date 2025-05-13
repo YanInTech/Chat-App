@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  final String username;
+  const ChatPage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Hi Pooja!'),
+        title: Text('Hi $username'),
         actions: [
           IconButton(
               onPressed: () {
