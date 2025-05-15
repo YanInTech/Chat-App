@@ -58,8 +58,8 @@ class LoginPage extends StatelessWidget {
                   fontSize: 20,
                   color: Colors.blueGrey),
             ),
-            Image.network(
-              'https://th.bing.com/th/id/R.73e9d869b7824956881985300bad12ea?rik=HECJEhmoQWhz9A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fniX%2fo77%2fniXo7745T.png&ehk=STYDZV4xsoPe%2f2NBzJlYayG8lIemvAO3Hac%2fK9N13oY%3d&risl=&pid=ImgRaw&r=0',
+            Image.asset(
+              'assets/illustration.jpg',
               height: 200,
             ),
 
