@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+<<<<<<< HEAD
         android:label="chat_app2"
+=======
+        android:label="chat_app"
+>>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

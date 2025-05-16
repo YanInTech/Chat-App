@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import 'dart:js';
+>>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
 
 import 'package:chat_app/chat_page.dart';
 import 'package:chat_app/utils/spaces.dart';

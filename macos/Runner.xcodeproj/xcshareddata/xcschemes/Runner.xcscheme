@@ -15,7 +15,11 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
                BuildableName = "chat_app2.app"
+=======
+               BuildableName = "chat_app.app"
+>>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
                BlueprintName = "Runner"
                ReferencedContainer = "container:Runner.xcodeproj">
             </BuildableReference>
@@ -31,7 +35,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
             BuildableName = "chat_app2.app"
+=======
+            BuildableName = "chat_app.app"
+>>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -65,7 +73,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
             BuildableName = "chat_app2.app"
+=======
+            BuildableName = "chat_app.app"
+>>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -82,7 +94,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+<<<<<<< HEAD
             BuildableName = "chat_app2.app"
+=======
+            BuildableName = "chat_app.app"
+>>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
