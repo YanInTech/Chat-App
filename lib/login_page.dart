@@ -64,9 +64,6 @@ class LoginPage extends StatelessWidget {
               'assets/illustration.jpg',
               height: 200,
             ),
-
-            //TODO: Add Username & Password text fields
-
             Form(
               key: _formkey,
               child: Column(
