@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # chat_app2
-=======
-# chat_app
->>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
 
 A new Flutter project.
 

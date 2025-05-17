@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-=======
-import 'dart:js';
->>>>>>> 567cefbf12c7f5e44dd04a1aa2e44893fd454284
-
 import 'package:chat_app/chat_page.dart';
 import 'package:chat_app/utils/spaces.dart';
 import 'package:chat_app/utils/textfield_styles.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -32,6 +28,8 @@ class LoginPage extends StatelessWidget {
 
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  final _mainUrl = "https://google.com";
 
   @override
   Widget build(BuildContext context) {
@@ -105,22 +103,18 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
                 )),
             // TODO: Add the supporting text by final design
-            InkWell(
-              splashColor: Colors.red,
-              onDoubleTap: () {
-                print('double tapped!');
-              },
-              onLongPress: () {
-                print('onLongpress');
-              },
-              onTap: () {
+            GestureDetector(
+              onTap: () async {
                 // TODO: Navigate to browser
                 print('Link clicked!');
+                if (!await launchUrl(Uri.parse(_mainUrl))) {
+                  throw 'Could not launch!';
+                }
               },
               child: Column(
                 children: [
                   Text('Find us on'),
-                  Text('https://google.com'),
+                  Text(_mainUrl),
                 ],
               ),
             ),
