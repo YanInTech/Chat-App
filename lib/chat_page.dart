@@ -1,3 +1,4 @@
+import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final username = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
@@ -20,7 +20,7 @@ class ChatPage extends StatelessWidget {
           IconButton(
               onPressed: () {
                 //TODO: Navigate back to LoginPage on logout
-                
+
                 Navigator.pushReplacementNamed(context, '/');
                 print('Icon pressed!');
               },
@@ -31,15 +31,18 @@ class ChatPage extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return ChatBubble(
-                    alignment: index % 2 == 0
-                        ? Alignment.centerLeft
-                        : Alignment.centerRight,
-                    message: "Hello, this is Pooja!");
-              }
-            ),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return ChatBubble(
+                      alignment: index % 2 == 0
+                          ? Alignment.centerLeft
+                          : Alignment.centerRight,
+                      entity: ChatMessageEntity(
+                          id: '1234',
+                          text: 'hello this is Pooja!',
+                          createdAt: DateTime.now().millisecondsSinceEpoch,
+                          author: Author(userName: 'Hakdog')));
+                }),
           ),
           ChatInput(),
         ],
