@@ -4,7 +4,6 @@ import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:flutter/services.dart';
 
 class ChatPage extends StatefulWidget {
@@ -27,12 +26,17 @@ class _ChatPageState extends State<ChatPage> {
       return ChatMessageEntity.fromJson(listItem);
     }).toList();
 
-    print(_chatMessages.length);
+    // print(_chatMessages.length);
 
     //final state of messages
     setState(() {
       _messages = _chatMessages;
     });
+  }
+
+  onMessageSent(ChatMessageEntity entity) {
+    _messages.add(entity);
+    setState(() {});
   }
 
   @override
@@ -44,7 +48,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    _loadInitialMessages();
+    // _loadInitialMessages();
     final username = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
@@ -74,9 +78,10 @@ class _ChatPageState extends State<ChatPage> {
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
                       entity: _messages[index]);
-                }),
+                })),
+          ChatInput(
+            onSubmit: onMessageSent,
           ),
-          ChatInput(),
         ],
       ),
     );
