@@ -19,7 +19,7 @@ class _ChatPageState extends State<ChatPage> {
   List<ChatMessageEntity> _messages = [];
 
   _loadInitialMessages() async {
-    rootBundle.loadString('assets/mock_messages.json').then((response){
+    rootBundle.loadString('assets/mock_messages.json').then((response) {
       final List<dynamic> decodeList = jsonDecode(response) as List;
 
       final List<ChatMessageEntity> _chatMessages = decodeList.map((listItem) {
@@ -31,13 +31,12 @@ class _ChatPageState extends State<ChatPage> {
       //final state of messages
       setState(() {
         _messages = _chatMessages;
-      });  
+      });
     }).then((_) {
       print('done!');
     });
 
     print('Something');
-
   }
 
   onMessageSent(ChatMessageEntity entity) {
@@ -45,7 +44,7 @@ class _ChatPageState extends State<ChatPage> {
     setState(() {});
   }
 
-  _getNetworkImages() async {
+  Future<List<PixelfordImage>> _getNetworkImages() async {
     var endpointUrl = Uri.parse('https://pixelford.com/api2/images');
 
     final response = await http.get(endpointUrl);
@@ -57,7 +56,10 @@ class _ChatPageState extends State<ChatPage> {
         return PixelfordImage.fromJson(listItem);
       }).toList();
 
-      print(_imageList[0].urlFullSize);  
+      print(_imageList[0].urlFullSize);
+      return _imageList;
+    } else {
+      throw Exception('API not successful!');
     }
   }
 
@@ -91,16 +93,25 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Column(
         children: [
+          FutureBuilder<List<PixelfordImage>>(
+              future: _getNetworkImages(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<PixelfordImage>> snapshot) {
+                if (snapshot.hasData)
+                  return Image.network(snapshot.data![0].urlSmallSize);
+
+                return CircularProgressIndicator();
+              }),
           Expanded(
-            child: ListView.builder(
-                itemCount: _messages.length,
-                itemBuilder: (context, index) {
-                  return ChatBubble(
-                      alignment: _messages[index].author.userName == 'hakdog'
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      entity: _messages[index]);
-                })),
+              child: ListView.builder(
+                  itemCount: _messages.length,
+                  itemBuilder: (context, index) {
+                    return ChatBubble(
+                        alignment: _messages[index].author.userName == 'hakdog'
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        entity: _messages[index]);
+                  })),
           ChatInput(
             onSubmit: onMessageSent,
           ),
