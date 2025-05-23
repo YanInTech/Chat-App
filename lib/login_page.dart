@@ -33,74 +33,105 @@ class LoginPage extends StatelessWidget {
 
   final _mainUrl = "https://google.com";
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
+  Widget _buildHeader(context) {
+    return Column(
+      children: [
+        Text(
+          'Let\'s sign you in!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 30,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5),
+        ),
+        Text(
+          'Welcome back! \n You\'ve been missed!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              color: Colors.blueGrey),
+        ),
+        verticalSpacing(24),
+        Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                // fit: BoxFit.fitWidth,
+                image: AssetImage('assets/illustration.jpg')),
+              borderRadius: BorderRadius.circular(24)),
+          ),
+        verticalSpacing(24),
+      ],
+    );
+  }
+
+  Widget _buildFooter() {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () async {
+            print('Link clicked!');
+            if (!await launchUrl(Uri.parse(_mainUrl))) {
+              throw 'Could not launch!';
+            }
+          },
+          child: Column(
+            children: [
+              Text('Find us on'),
+              Text(_mainUrl),
+            ],
+          ),
+        ),
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Let\'s sign you in!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5),
-            ),
-            Text(
-              'Welcome back! \n You\'ve been missed!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                  color: Colors.blueGrey),
-            ),
-            verticalSpacing(24),
-            Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    // fit: BoxFit.fitWidth,
-                    image: AssetImage('assets/illustration.jpg')),
-                  borderRadius: BorderRadius.circular(24)),
+            SocialMediaButton.twitter(
+              size: 20,
+              color: Colors.blue,
+              url: 'https://twitter.com'),
+            SocialMediaButton.linkedin(url: 'https://linkedin.com')
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _buildForm(context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              LoginTextField(
+                hintText: 'Enter your username',
+                validator: (value) {
+                  if (value != null &&
+                      value.isNotEmpty &&
+                      value.length < 5) {
+                    return "Your username should be more than 5 characters";
+                  } else if (value != null && value.isEmpty) {
+                    return "Please type your username";
+                  }
+                  return null;
+                },
+                controller: userNameController,
               ),
-            verticalSpacing(24),
-            
-            Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  LoginTextField(
-                    hintText: 'Enter your username',
-                    validator: (value) {
-                      if (value != null &&
-                          value.isNotEmpty &&
-                          value.length < 5) {
-                        return "Your username should be more than 5 characters";
-                      } else if (value != null && value.isEmpty) {
-                        return "Please type your username";
-                      }
-                      return null;
-                    },
-                    controller: userNameController,
-                  ),
-                  verticalSpacing(24),
-                  LoginTextField(
-                    hasAsterisks: true,
-                    hintText: 'Enter your password',
-                    controller: passwordController,
-                  ),
-                ],
+              verticalSpacing(24),
+              LoginTextField(
+                hasAsterisks: true,
+                hintText: 'Enter your password',
+                controller: passwordController,
               ),
-            ),
-            verticalSpacing(24),
+            ],
+          ),
+        ),
+        verticalSpacing(24),
             ElevatedButton(
                 onPressed: () async {
                   await loginUser(context);
@@ -109,34 +140,51 @@ class LoginPage extends StatelessWidget {
                   'Login',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
                 )),
-            // TODO: Add the supporting text by final design
-            GestureDetector(
-              onTap: () async {
-                // TODO: Navigate to browser
-                print('Link clicked!');
-                if (!await launchUrl(Uri.parse(_mainUrl))) {
-                  throw 'Could not launch!';
-                }
-              },
-              child: Column(
+      ],
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: LayoutBuilder(
+          builder: (context, BoxConstraints constraints) {
+            if(constraints.maxWidth > 1000) {
+              // web layout
+              return Row(
                 children: [
-                  Text('Find us on'),
-                  Text(_mainUrl),
+                  Spacer(flex: 1),
+                  
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildHeader(context),
+                        _buildFooter(),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 1,),
+                  Expanded(child: _buildForm(context)),
+                  Spacer(flex: 1,),
                 ],
-              ),
-            ),
-            // TODO: Add Social media buttons here
-            Row(
+              );
+            }
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SocialMediaButton.twitter(
-                  size: 20,
-                  color: Colors.blue,
-                  url: 'https://twitter.com'),
-                SocialMediaButton.linkedin(url: 'https://linkedin.com')
+                _buildHeader(context),
+                _buildForm(context),
+                _buildFooter(),
               ],
-            )
-          ],
+            );
+          }
         ),
       ),
     ));
